@@ -46,7 +46,12 @@ public class TaskController {
         return ResponseEntity.noContent().build();
     }
 
+    @DeleteMapping
+    public ResponseEntity<Void> deletarTodas(){
 
+        taskService.deletarTodasTarefas();
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

@@ -42,4 +42,10 @@ public class TaskService {
 
         taskRepository.delete(tarefaDeletar);
     }
+
+    public void deletarTodasTarefas(){
+        taskRepository.deleteAll();
+    }
 }
+
+
