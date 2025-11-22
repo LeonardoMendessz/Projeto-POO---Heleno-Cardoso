@@ -53,5 +53,10 @@ public class TaskController {
         return ResponseEntity.noContent().build();
     }
 
+    @PatchMapping("/concluir-todas")
+    public ResponseEntity<Void> concluirTodas(){
+        taskService.concluirTodas();
+        return ResponseEntity.ok().build();
+    }
 
 }

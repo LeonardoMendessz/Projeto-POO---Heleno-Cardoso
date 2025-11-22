@@ -1,5 +1,6 @@
 package com.projetomateriajava.Projeto.da.materia.de.Java.Task;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +47,15 @@ public class TaskService {
     public void deletarTodasTarefas(){
         taskRepository.deleteAll();
     }
+
+    @Transactional
+    public void concluirTodas(){
+        taskRepository.marcarTodasComoConcluidas();
+    }
 }
+
+
+
+
 
 
