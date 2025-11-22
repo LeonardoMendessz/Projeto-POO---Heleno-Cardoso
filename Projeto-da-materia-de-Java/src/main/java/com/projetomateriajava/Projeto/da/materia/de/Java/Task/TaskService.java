@@ -1,5 +1,6 @@
 package com.projetomateriajava.Projeto.da.materia.de.Java.Task;
 
+import com.projetomateriajava.Projeto.da.materia.de.Java.User.UserModel;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,10 @@ public class TaskService {
 
     }
 
+    public List<TaskModel> buscarTarefaporUser (UserModel user){
+        return taskRepository.findByUser(user);
+    }
+
     public TaskModel attTarefa (Long id,boolean concluido){
        TaskModel tarefaEncontrada = taskRepository.findById(id).orElseThrow(()
                -> new RuntimeException("Tarefa com ID" + id + " não encontrado"));
@@ -51,6 +56,27 @@ public class TaskService {
     @Transactional
     public void concluirTodas(){
         taskRepository.marcarTodasComoConcluidas();
+    }
+
+    public void deleteTask(TaskModel task) {
+        taskRepository.delete(task);
+    }
+
+    public Optional<TaskModel> findById(Long id) {
+        return taskRepository.findById(id);
+    }
+
+    public TaskModel saveTask(TaskModel task) {
+        return taskRepository.save(task);
+    }
+
+    public void deleteTask(Long id) {
+        taskRepository.deleteById(id);
+    }
+
+    public List<TaskModel> findByUserAndConcluido(UserModel user, boolean concluido) {
+        // Usa o novo método do Repositório
+        return taskRepository.findByUserAndConcluido(user, concluido);
     }
 }
 

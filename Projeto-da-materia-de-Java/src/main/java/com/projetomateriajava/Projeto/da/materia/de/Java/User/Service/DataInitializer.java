@@ -1,7 +1,7 @@
-package User.Service;
+package com.projetomateriajava.Projeto.da.materia.de.Java.User.Service;
 
-import User.UserModel;
-import User.UserRepository;
+import com.projetomateriajava.Projeto.da.materia.de.Java.User.UserModel;
+import com.projetomateriajava.Projeto.da.materia.de.Java.User.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;

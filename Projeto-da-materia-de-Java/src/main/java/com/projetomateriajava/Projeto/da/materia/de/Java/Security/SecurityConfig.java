@@ -1,4 +1,4 @@
-package Security;
+package com.projetomateriajava.Projeto.da.materia.de.Java.Security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

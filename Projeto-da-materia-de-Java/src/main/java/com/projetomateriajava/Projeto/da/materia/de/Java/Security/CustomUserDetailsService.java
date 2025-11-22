@@ -1,7 +1,7 @@
-package Security;
+package com.projetomateriajava.Projeto.da.materia.de.Java.Security;
 
-import User.UserModel;
-import User.UserRepository;
+import com.projetomateriajava.Projeto.da.materia.de.Java.User.UserModel;
+import com.projetomateriajava.Projeto.da.materia.de.Java.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,4 +1,4 @@
-package User;
+package com.projetomateriajava.Projeto.da.materia.de.Java.User;
 
 import jakarta.persistence.*;
 import lombok.Data;
