@@ -15,18 +15,19 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
-
     }
 
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception{
         http
                 .authorizeHttpRequests((requests)  -> requests
-                        .requestMatchers("/login", "/").permitAll()
+
+                        .requestMatchers("/login", "/", "/style-login.css", "/Midia/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/task", true) // Redireciona para sua to-do list
+                        .defaultSuccessUrl("/task", true)
                         .permitAll()
                 )
                 .logout((logout) -> logout

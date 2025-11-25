@@ -1,0 +1,506 @@
+/* Fonte clássica do XP e fundo da "área de trabalho" */
+body {
+    font-family: 'Tahoma', sans-serif;
+    font-size: 11px;
+    background-image: url('https://images2.alphacoders.com/941/thumb-1920-941898.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    height: 100vh;
+    margin: 0;
+    overflow: hidden; 
+}
+
+.desktop-wrapper {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    gap: 20px; 
+    height: 100vh;
+    padding-bottom: 40px; 
+    box-sizing: border-box; 
+}
+
+/* ESTILOS DA JANELA */
+.window-xp {
+    width: 450px;
+    background: #ECE9D8;
+    border-top: 2px solid #FFFFFF;
+    border-left: 2px solid #FFFFFF;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    padding: 3px;
+    z-index: 10;
+    display: block; 
+}
+.window-xp.minimized {
+    display: none; 
+}
+
+.title-bar {
+    background: linear-gradient(to right, #0A246B, #A6CAF0);
+    padding: 4px 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    cursor: default;
+}
+.title-bar-text {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.title-bar-controls {
+    display: flex;
+}
+.title-bar-controls button {
+    width: 28px; 
+    height: 28px; 
+    border: none; 
+    background: transparent; 
+    padding: 0; 
+    margin-left: 3px;
+    cursor: pointer;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+.title-bar-controls button img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; 
+}
+
+.window-body {
+    padding: 10px;
+    border: 1px solid #7F9DB9;
+    background: white;
+    height: 300px; 
+    overflow: hidden; 
+    box-sizing: border-box; 
+}
+
+/* CONTROLES INTERNOS */
+.controls {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.controls label {
+    font-weight: bold;
+}
+.controls input[type="text"] {
+    flex-grow: 1;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 11px;
+    padding: 4px;
+    border: 1px solid #7F9DB9;
+    border-style: inset;
+    border-color: #7F9DB9;
+    background: #FFFFFF;
+}
+button {
+    font-family: 'Tahoma', sans-serif;
+    font-size: 11px;
+    background: #ECE9D8;
+    border: 1px solid #000;
+    border-style: outset;
+    border-color: #FFFFFF #404040 #404040 #FFFFFF;
+    padding: 3px 12px;
+    cursor: pointer;
+}
+button:active {
+    border-style: inset;
+}
+
+/* LISTA DE TAREFAS */
+#task-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+    border-top: 1px solid #D4D0C8;
+    padding-top: 5px;
+    height: 185px; 
+    overflow-y: auto; 
+}
+#task-list li {
+    display: flex;
+    align-items: center;
+    padding: 4px 0;
+    gap: 6px;
+}
+#task-list li label {
+    flex-grow: 1;
+    cursor: pointer;
+}
+#task-list li input[type="checkbox"]:checked + label {
+    text-decoration: line-through;
+    color: #888;
+}
+.delete-btn {
+    background: #ECE9D8;
+    border: 1px solid #000;
+    border-style: outset;
+    border-color: #FFFFFF #404040 #404040 #FFFFFF;
+    width: 24px; 
+    height: 24px; 
+    padding: 0; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+.delete-btn:active {
+    border-style: inset;
+}
+.delete-btn img {
+    width: 16px; 
+    height: 16px; 
+    object-fit: contain; 
+}
+.filter-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #D4D0C8;
+}
+.filter-controls label {
+    font-weight: bold;
+}
+.filter-controls select {
+    font-family: 'Tahoma', sans-serif;
+    font-size: 11px;
+    border: 1px solid #7F9DB9;
+    background: #FFFFFF;
+    padding: 2px;
+}
+
+/* BLOCO DE NOTAS */
+#notepad-window .window-body {
+    padding: 0;
+    height: 300px; 
+}
+.notepad-textarea {
+    width: 100%;
+    height: 100%; 
+    box-sizing: border-box; 
+    border: none; 
+    font-family: 'Tahoma', sans-serif;
+    font-size: 12px;
+    padding: 5px;
+    resize: none; 
+    outline: none;
+}
+
+/* PLAYER DE MÚSICA */
+#music-window {
+    width: 350px; 
+}
+#music-window .window-body {
+    height: 150px; 
+    background: #ECE9D8;
+    overflow: hidden;
+    padding: 10px;
+}
+.player-screen {
+    background: black;
+    border: 2px inset #7F9DB9;
+    height: 40px;
+    color: #00FF00; 
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+.player-progress {
+    width: 100%;
+    margin: 10px 0;
+}
+.player-controls {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+.player-controls button {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    width: 40px;
+    height: 28px;
+    padding: 0;
+    line-height: 28px; 
+}
+.btn-volume {
+    width: 28px !important; 
+    font-size: 16px !important;
+    font-weight: bold;
+}
+
+/* =======================================================
+   ===  ÍCONES DO DESKTOP (CORRIGIDO EFEITO PULSANTE) ===
+   =======================================================
+*/
+
+/* Lixeira (Topo) */
+#trash-icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    z-index: 2000;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.5)); 
+    transition: transform 0.2s;
+    object-fit: contain;
+}
+#trash-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Música (Abaixo da Lixeira) */
+#music-icon {
+    position: fixed;
+    top: 90px; 
+    left: 24px; 
+    width: 48px;
+    height: 48px; 
+    cursor: pointer;
+    z-index: 2000;
+    /* Fundo padrão translúcido */
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+#music-icon:hover {
+    transform: scale(1.1);
+}
+
+/* --- ESTILO QUANDO A MÚSICA TOCA --- */
+#music-icon.playing {
+    /* Fundo verde forte */
+    background-color: rgba(62, 189, 66, 0.8) !important; 
+    /* Borda verde brilhante */
+    border: 2px solid #7CFC00; 
+    /* Animação de pulso */
+    animation: pulse 1.5s infinite; 
+    box-shadow: 0 0 15px rgba(62, 189, 66, 0.8); /* Brilho externo */
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(62, 189, 66, 0.7); }
+    70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(62, 189, 66, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(62, 189, 66, 0); }
+}
+
+/* Player do YouTube */
+#youtube-player { 
+    position: fixed;
+    top: -9999px;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+}
+
+/* BARRA DE TAREFAS E MENU INICIAR */
+.taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px; 
+    background: linear-gradient(to right, #245EDC 0%, #3F8CF3 100%);
+    border-top: 1px solid #6CA3F3;
+    display: flex;
+    align-items: center;
+    padding: 0 5px; 
+    z-index: 1000; 
+    box-sizing: border-box;
+}
+.start-button {
+    background: linear-gradient(to bottom, #3EBD42 0%, #58E45B 40%, #51D054 60%, #46AF48 100%);
+    border: 1px solid #328E35;
+    border-radius: 18px 18px 0 0 / 20px 20px 0 0; 
+    padding: 0 15px 0 10px; 
+    gap: 5px; 
+    height: 32px; 
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 16px; 
+    text-transform: lowercase;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    font-style: italic;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+.start-button:hover {
+    background: linear-gradient(to bottom, #49DB4D 0%, #63F065 40%, #5BE05E 60%, #51C653 100%);
+}
+.start-logo {
+    width: 22px; 
+    height: 22px;
+}
+.taskbar-item {
+    background: #3F8CF3;
+    border: 1px solid #2C65B3;
+    border-style: outset;
+    border-color: #6CA3F3 #2C65B3 #2C65B3 #6CA3F3;
+    height: 30px; 
+    margin-left: 6px;
+    padding: 0 10px; 
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+.taskbar-item img {
+    margin-right: 5px;
+}
+.taskbar-item.active {
+    background: #3074D0;
+    border-style: inset;
+}
+.system-tray {
+    margin-left: auto; 
+    background: #3F90F3;
+    border: 1px solid #2C65B3;
+    border-style: inset;
+    height: 30px; 
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.2) inset;
+}
+#clock-time, #clock-separator, #clock-date {
+    font-size: 12px; 
+    cursor: default;
+}
+
+#start-menu {
+    position: fixed;
+    bottom: 40px; 
+    left: 4px; 
+    width: 400px;
+    display: none; 
+    z-index: 2000;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    border: 1px solid #0A246B;
+    border-radius: 4px;
+    overflow: hidden;
+}
+#start-menu.show {
+    display: flex; 
+}
+.start-menu-left {
+    width: 60%;
+    background: linear-gradient(to right, #FEFEFE, #E7E7E7);
+    border-right: 1px solid #AAA;
+}
+.start-menu-right {
+    width: 40%;
+    background: #D4E6F8;
+    color: #0A246B;
+    display: flex;
+    flex-direction: column;
+    position: relative; 
+}
+.start-menu-header {
+    background: #0A246B;
+    color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.start-menu-header img {
+    width: 40px;
+    height: 40px;
+    border: 2px solid white;
+    border-radius: 4px;
+    object-fit: auto;
+}
+.start-menu-header span {
+    font-weight: bold;
+    font-size: 14px;
+}
+.start-menu-list {
+    list-style: none;
+    padding: 5px;
+    margin: 0;
+}
+.start-menu-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.start-menu-list li:hover {
+    background: #316AC5;
+    color: white;
+}
+.start-menu-list li img {
+    width: 24px;
+    height: 24px;
+}
+.start-menu-right .start-menu-list {
+    flex-grow: 1; 
+}
+.start-menu-right .start-menu-list li::before {
+    content: '►'; 
+    font-size: 10px;
+    margin-right: 5px;
+}
+.start-menu-footer {
+    background: #D4E6F8;
+    padding: 8px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    border-top: 1px solid #9ABEE6;
+    margin-top: auto; 
+}
+.start-menu-footer button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #0A246B;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px;
+    border-radius: 4px;
+}
+.start-menu-footer button:hover {
+    background: #316AC5;
+    color: white;
+}
+#btn-turnoff {
+    color: #C83C0C;
+    font-weight: bold;
+}
+#btn-turnoff:hover {
+    background: #C83C0C;
+    color: white;
+}

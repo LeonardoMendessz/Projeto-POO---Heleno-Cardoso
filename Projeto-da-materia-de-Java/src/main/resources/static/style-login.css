@@ -1,0 +1,226 @@
+body {
+    margin: 0;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 11px;
+    background: linear-gradient(to bottom, #0A246B 0%, #0A246B 20%, #4682B4 100%); /* Azul do XP */
+    color: white;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.welcome-screen {
+    display: flex;
+    flex-grow: 1;
+    padding: 50px 0;
+    box-sizing: border-box;
+}
+
+.left-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 50px;
+    text-align: center;
+    position: relative;
+}
+
+.left-pane::after { /* Linha divisória */
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 20%;
+    bottom: 20%;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.5), transparent);
+}
+
+.xp-logo {
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.left-pane p {
+    font-size: 14px;
+    line-height: 1.5;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.right-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 50px;
+}
+
+/*
+===================================================================
+===  ESTILOS DO CAMPO DE SENHA (AUMENTADOS) ===
+===================================================================
+*/
+.user-profile-password {
+    background: transparent;
+    border: none;
+    padding: 0;
+    width: 480px;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* Remover o border-radius para que o .user-info-bar defina ele */
+    border-radius: 0;
+}
+
+.user-info-bar {
+    display: flex;
+    align-items: center;
+    /* --- MUDANÇA PRINCIPAL AQUI: Degradê e Máscara para "sumir" --- */
+    background: linear-gradient(to right, #004586, #4c8dd370, #4C8DD3 50%, rgba(76, 141, 211, 0.2) 95%, transparent 100%);
+
+    /* Borda: Usaremos uma borda sólida e depois uma máscara para ela sumir */
+    border: 1px solid #104A7F;
+    border-right: none; /* Remove a borda direita sólida */
+
+    border-radius: 5px;
+    padding: 10px 12px;
+    z-index: 1;
+    position: relative;
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+
+    /* A MÁSCARA para fazer a borda e o fundo sumirem */
+    mask-image: linear-gradient(to right, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%); /* Para compatibilidade com Webkit */
+}
+
+.user-icon-small {
+    width: 56px;
+    height: 56px;
+    border: 1px solid #FFD700;
+    border-radius: 3px;
+    padding: 0;
+    background-color: transparent;
+    margin-right: 15px;
+    object-fit: auto;
+}
+
+.username-password-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.username-label {
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+    color: white;
+}
+
+.password-prompt {
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+}
+
+.password-input-area {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0;
+    position: absolute;
+    top: 60px;
+    left: 83px;
+    z-index: 2;
+}
+
+.password-field {
+    flex-grow: 1;
+    height: 34px;
+    width: 280px;
+    border: 1px solid #7F9DB9;
+    border-style: inset;
+    border-color: #7F9DB9 #CDD9EA #CDD9EA #7F9DB9;
+    background: #FFFFFF;
+    padding: 0 8px;
+    font-size: 16px;
+    outline: none;
+    border-radius: 3px;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+.password-field:focus {
+    border-color: #7F9DB9 #CDD9EA #CDD9EA #7F9DB9;
+}
+
+.login-arrow-btn {
+    background: linear-gradient(to bottom, #7FDB72 0%, #6AC15E 20%, #56A24B 80%, #49A43B 100%);
+    border: 1px solid #3B862F;
+    border-style: outset;
+    border-color: #8FDD83 #3B862F #3B862F #8FDD83;
+    border-radius: 5px;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.login-arrow-btn:hover {
+    background: linear-gradient(to bottom, #93E887 0%, #7CD470 20%, #64B55A 80%, #57B34C 100%);
+}
+
+.login-arrow-btn:active {
+    border-style: inset;
+    background: linear-gradient(to top, #7FDB72 0%, #6AC15E 20%, #56A24B 80%, #49A43B 100%);
+}
+
+.login-arrow-btn svg path {
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.4));
+}
+
+
+/*
+=================================================
+===  RODAPÉ XP (Turn off computer)           ===
+=================================================
+*/
+.footer-xp {
+    background: linear-gradient(to right, #0A246B 0%, #0A246B 20%, #4682B4 100%);
+    border-top: 2px solid #3F8CF3;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.turn-off {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.turn-off:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.turn-off-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+.footer-text {
+    text-align: right;
+    line-height: 1.4;
+    color: rgba(255,255,255,0.7);
+}

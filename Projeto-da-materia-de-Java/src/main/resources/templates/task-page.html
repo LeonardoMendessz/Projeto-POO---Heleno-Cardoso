@@ -1,99 +1,120 @@
 <!DOCTYPE html>
-<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Tarefas do Windows XP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Lista de Tarefas</title>
+    <link rel="shortcut icon" th:href="@{/Midia/tarefas.ico}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/style-todo.css}">
 </head>
 <body>
 
-<h2 th:text="'Bem-vindo, ' + ${username} + '!'">Bem-vindo, Gustavo!</h2>
-<p>Esta é a sua lista de tarefas pessoal.</p>
+<img th:src="@{/Midia/lixeira.webp}" id="trash-icon" title="Esvaziar Lixeira (Excluir Tudo)">
+<img th:src="@{/Midia/musica.png}" id="music-icon" title="Abrir player de música">
 
-<hr/>
+<div class="desktop-wrapper">
 
-<h3>Nova Tarefa</h3>
-<form th:action="@{/task/new}" th:object="${newTask}" method="post">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-    <input type="text" th:field="*{descricao}" placeholder="Descreva a nova tarefa" required>
-    <button type="submit">Adicionar</button>
-</form>
+    <div class="window-xp" id="todo-window">
 
-<hr/>
+        <div class="title-bar">
+            <div class="title-bar-text">
+                <img th:src="@{/Midia/tarefas.ico}" alt="icon" width="16" height="16" />
+                Minha Lista de Tarefas
+            </div>
+            <div class="title-bar-controls">
+                <form th:action="@{/logout}" method="post" style="display: inline;">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <button type="submit" id="btn-voltar" title="Voltar para a página inicial (Logoff)">
+                        <img th:src="@{/Midia/voltar.png}" alt="Voltar" style="width: 16px; height: 16px;">
+                    </button>
+                </form>
 
-<h3>Filtros</h3>
+                <form th:action="@{/task/complete-all}" method="post" style="display: inline;">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <button type="submit" id="btn-concluir" title="Concluir todas as tarefas">
+                        <img th:src="@{/Midia/concluido.png}" alt="Concluir" style="width: 16px; height: 16px;">
+                    </button>
+                </form>
 
-<span style="margin-right: 15px;">
-    <a th:href="@{/task}"
-       th:style="${currentFilter == 'all' or currentFilter == null} ? 'font-weight: bold; color: blue;' : ''">
-        Todas
-    </a>
-</span>
+                <form th:action="@{/task/delete-all}" method="post" style="display: inline;">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <button type="submit" id="btn-lixeira" title="Excluir todas as tarefas" onclick="return confirm('ATENÇÃO! Excluir todas as tarefas?');">
+                        <img th:src="@{/Midia/lixeira.png}" alt="Lixeira" style="width: 16px; height: 16px;">
+                    </button>
+                </form>
+            </div>
+        </div>
 
-<span style="margin-right: 15px;">
-    <a th:href="@{/task(filter='uncompleted')}"
-       th:style="${currentFilter == 'uncompleted'} ? 'font-weight: bold; color: blue;' : ''">
-        Pendentes
-    </a>
-</span>
+        <div class="window-body">
 
-<span style="margin-right: 15px;">
-    <a th:href="@{/task(filter='completed')}"
-       th:style="${currentFilter == 'completed'} ? 'font-weight: bold; color: blue;' : ''">
-        Concluídas
-    </a>
-</span>
+            <form th:action="@{/task/new}" th:object="${newTask}" method="post" id="add-task-form">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <div class="controls">
+                    <label for="new-task-input">Nova Tarefa:</label>
+                    <input type="text" id="new-task-input" th:field="*{descricao}" placeholder="Ex: Estudar Ciência da Computação..." required>
+                    <button type="submit">Adicionar</button>
+                </div>
+            </form>
 
-<hr/>
-<h3>Minhas Tarefas</h3>
+            <div class="filter-controls">
+                <label for="filter-select">Filtrar por:</label>
+                <select id="filter-select" onchange="window.location.href = '/task?filter=' + this.value">
+                    <option value="all" th:selected="${currentFilter == 'all' or currentFilter == null}">Todos</option>
+                    <option value="uncompleted" th:selected="${currentFilter == 'uncompleted'}">Pendentes</option>
+                    <option value="completed" th:selected="${currentFilter == 'completed'}">Concluídos</option>
+                </select>
+            </div>
 
-<div th:if="${tasks.isEmpty()}">
-    <p th:if="${currentFilter == 'all' or currentFilter == null}">Você não tem tarefas registradas ainda.</p>
-    <p th:if="${currentFilter == 'completed'}">Nenhuma tarefa foi concluída.</p>
-    <p th:if="${currentFilter == 'uncompleted'}">Parabéns! Nenhuma tarefa está pendente.</p>
+            <ul id="task-list">
+                <li th:each="task : ${tasks}">
+
+                    <form th:action="@{/task/toggle/{id}(id=${task.id})}" method="post" style="display: contents;">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                        <input type="checkbox" onchange="this.form.submit()" th:id="${'task-' + task.id}" th:checked="${task.concluido}">
+                        <label th:for="${'task-' + task.id}" th:text="${task.descricao}"
+                               th:style="${task.concluido ? 'text-decoration: line-through; color: #888;' : ''}">
+                            Tarefa do Backend
+                        </label>
+                    </form>
+
+                    <form th:action="@{/task/delete/{id}(id=${task.id})}" method="post" style="margin-left: auto;">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                        <button class="delete-btn" type="submit" title="Excluir esta tarefa" onclick="return confirm('Excluir?');">
+                            <img th:src="@{/Midia/excluir.ico}" alt="Excluir" style="width: 16px; height: 16px;">
+                        </button>
+                    </form>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="window-xp minimized" id="notepad-window">
+    </div>
+
+    <div class="window-xp minimized" id="music-window">
+    </div>
+
 </div>
 
-<ul th:unless="${tasks.isEmpty()}">
-    <li th:each="task : ${tasks}">
-
-        <span th:text="${task.descricao}"
-              th:style="${task.concluido ? 'text-decoration: line-through; color: gray;' : 'font-weight: bold;'}">
-            Descrição da Tarefa
-        </span>
-
-        <form th:action="@{/task/toggle/{id}(id=${task.id})}" method="post" style="display: inline;">
+<div id="start-menu">
+    <div class="start-menu-footer">
+        <form th:action="@{/logout}" method="post" id="logoff-form" style="display: inline;">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-            <button type="submit" th:text="${task.concluido ? 'Desmarcar' : 'Concluir'}"></button>
+            <button type="submit" id="btn-logoff"><span>Log Off</span></button>
         </form>
-
-        <form th:action="@{/task/delete/{id}(id=${task.id})}" method="post" style="display: inline;">
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-            <button type="submit" onclick="return confirm('Tem certeza que deseja deletar?');">Excluir</button>
-        </form>
-
-    </li>
-</ul>
-
-<hr/>
-
-<div th:unless="${tasks.isEmpty()}">
-    <h3>Ações em Massa</h3>
-
-    <form th:action="@{/task/complete-all}" method="post" style="display: inline;">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-        <button type="submit">Concluir Todas</button>
-    </form>
-
-    <form th:action="@{/task/delete-all}" method="post" style="display: inline;">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-        <button type="submit" onclick="return confirm('ATENÇÃO! Tem certeza que deseja DELETAR TODAS as tarefas?');">Excluir Todas</button>
-    </form>
+        <button id="btn-turnoff"><span>Desligar</span></button>
+    </div>
 </div>
-<hr/>
 
-<form th:action="@{/logout}" method="post">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-    <button type="submit">Fazer Logout</button>
-</form>
 
+<footer class="taskbar">
+</footer>
+
+<div id="youtube-player"></div>
+
+<script th:src="@{/script-todo.js}"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
