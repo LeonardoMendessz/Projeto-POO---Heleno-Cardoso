@@ -110,6 +110,31 @@
 
 
 <footer class="taskbar">
+    <div class="start-button">
+        <img th:src="@{/Midia/logo-windows-xp.png}" alt="logo" class="start-logo">
+        <strong>start</strong>
+    </div>
+
+    <div class="taskbar-item active" id="btn-taskbar-todo" title="Minha Lista de Tarefas">
+        <img th:src="@{/Midia/tarefas.ico}" alt="icon" width="16" height="16">
+        <span>Minha Lista de Tarefas</span>
+    </div>
+
+    <div class="taskbar-item" id="btn-taskbar-notepad" title="Bloco de Notas">
+        <img th:src="@{/Midia/bloco_de_notas.webp}" alt="icon" width="16" height="16">
+        <span>Bloco de Notas</span>
+    </div>
+
+    <div class="taskbar-item" id="btn-taskbar-music" title="Player de Áudio">
+        <img th:src="@{/Midia/musica.png}" alt="icon" width="16" height="16">
+        <span>Player de Áudio</span>
+    </div>
+
+    <div class="system-tray">
+        <span id="clock-time">...</span>
+        <span id="clock-separator"> | </span>
+        <span id="clock-date">...</span>
+    </div>
 </footer>
 
 <div id="youtube-player"></div>
